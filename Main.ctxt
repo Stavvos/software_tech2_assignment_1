@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Main
+comment1.params=
+comment1.target=Main()
+comment2.params=newMeterObject
+comment2.target=void\ printingTestMeterObject(Meter)
+comment3.params=newFlatObject
+comment3.target=void\ printingTestFlatObject(Flat)
+numComments=4
