@@ -24,9 +24,9 @@ public class Main
       
         // for testing. Seems to be working 
        
-        //readFromMeterFiles();
+        readFromMeterFiles();
         
-        //printingTestMeterObjects(tenantMeterObjects); 
+        printingTestMeterObjects(tenantMeterObjects); 
         
         //readFromFlatFiles(); 
         
