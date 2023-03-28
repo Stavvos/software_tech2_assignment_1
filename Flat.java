@@ -37,11 +37,11 @@ public class Flat
     
     
     //getter and setter methods for this class Flat
-    public ArrayList<String> getList() {
+    public ArrayList<String> getTenantMetersList() {
         return tenantMeters;
     }
 
-    public void setList(ArrayList<String> newArrayList) {
+    public void setTenantMetersList(ArrayList<String> newArrayList) {
         tenantMeters = newArrayList;
     }
     
