@@ -16,23 +16,71 @@ public class Main
     String fileName;
     
     Scanner inFile; 
-    Scanner in = new Scanner(System.in); 
+    Scanner in = new Scanner(System.in);
+    
+    
     
     public Main()
     {
       System.out.println("\f"); 
       
+      
+      
         // for testing. Seems to be working 
        
-        readFromMeterFiles();
+        //readFromMeterFiles();
         
-        printingTestMeterObjects(tenantMeterObjects); 
+        //sortMeterFile(tenantMeterObjects);
         
-        //readFromFlatFiles(); 
+        //testingSort();  
+        
+        
+        
+        
+        //printingTestMeterObjects(tenantMeterObjects); 
+        
+        readFromFlatFiles(); 
+        
+        testingSearch(); //seems to be working
         
         //printingTestFlatObjects(flatObjects); 
+        
+        
        
     
+    }
+    
+    //a method for testing the binary search function
+    public void testingSearch()
+    {
+       
+         String searchAddress; 
+        System.out.println("Enter the street name you're searching for: ");
+        searchAddress = in.nextLine(); 
+        
+        int searchStreetNumber; 
+        System.out.println("Enter the street number you're looking for: "); 
+        searchStreetNumber = in.nextInt(); 
+        
+        int resultOfAddressSearch = findAddress(flatObjects, searchAddress, searchStreetNumber); 
+        
+        if (resultOfAddressSearch == -1)
+        {
+           System.out.println("Address not found"); 
+        }
+        else
+        {
+           System.out.println("The address was found at index " + resultOfAddressSearch); 
+        }
+    
+    }
+    
+    // a function for testing the selection sort method
+    public void testingSort()
+    {
+        System.out.println("Check [0] " + tenantMeterObjects.get(0).getFirstName() + " " + tenantMeterObjects.get(0).getLastName()); 
+        System.out.println("Check [9] " + tenantMeterObjects.get(9).getFirstName() + " " + tenantMeterObjects.get(9).getLastName()); 
+        System.out.println("Check last " + tenantMeterObjects.get(15).getFirstName() + " " + tenantMeterObjects.get(15).getLastName());
     }
     
     //function for printing an arraylist of Meter objects
@@ -192,6 +240,7 @@ public class Main
         int currentReading;
         int previousReading;
         
+        
         System.out.println("Enter the file name you'd like the program to read: "); 
         
         fileName = in.nextLine(); 
@@ -243,6 +292,8 @@ public class Main
                
                //add the meter object to the arrayList
                tenantMeterObjects.add(meterObject); 
+               
+               
                  
            }
         
@@ -255,4 +306,63 @@ public class Main
         inFile.close(); 
     }
     
+    //selection sort which is O(n^2) 
+    public void sortMeterFile(ArrayList<Meter> meterObjects)
+    {
+      int sizeOfArrayList = meterObjects.size(); 
+      
+      //nested for loops both of the same size is O(n^2)
+      for (int step = 0; step < sizeOfArrayList - 1; step++)
+      {
+         int minimumIndex = step; 
+         
+         for (int i = step + 1; i < sizeOfArrayList; i++)
+         {
+            //get the minimum tenantMeter value of the array list for each loop
+            if (meterObjects.get(i).getTenantMeterNumberInt() < meterObjects.get(minimumIndex).getTenantMeterNumberInt())
+            {
+              minimumIndex = i;
+            }
+         }
+         
+         //swap the Meter objects 
+         Meter temp = meterObjects.get(step);
+         meterObjects.set(step, meterObjects.get(minimumIndex)); //need to use set because we're working with array lists
+         meterObjects.set(minimumIndex, temp); 
+         
+      }
+    
+    }
+    
+    //a function that finds the array list indext of an adress
+    //it accepts the name of the street, along with the building number as search terms
+    //the algorithm used is binary search which is O(log n) 
+    public int findAddress(ArrayList<Flat> flatObjects, String searchTermStreet, int searchTermBuildingNumber )
+    {
+        
+            int left = 0, right = flatObjects.size() - 1; 
+            
+            while (left <= right)
+            {
+               int middle = left + (right - left) / 2;
+               
+               int result = searchTermStreet.compareTo(flatObjects.get(middle).getStreet()); //use compareTo() for comparing string
+               
+               if (result == 0  && flatObjects.get(middle).getBuildingNumber() == searchTermBuildingNumber)
+               {
+                  return middle;  
+               }
+               
+               if (result > 0 || (result == 0 && flatObjects.get(middle).getBuildingNumber() < searchTermBuildingNumber))
+               {
+                  left = middle + 1;  
+               }
+               
+               else
+               {
+                  right = middle - 1;  
+               }
+            }
+            return -1; //use this value if the searchTerm isn't found. 
+    }
 }

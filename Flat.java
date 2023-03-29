@@ -17,7 +17,7 @@ public class Flat
     public int currentReading; 
     public int previousReading;
     
-    public Flat()
+    public Flat( )
     {
          /*
        • They are comma separated.
@@ -33,6 +33,7 @@ public class Flat
         Alma Street,7,b239873,986460,06/04/2022,983395,09/01/2022,m163966,m163967,
         Alma Street,8,b239883,595049,06/04/2022,589650,09/01/2022,m163962,m163963,m163964,
       */
+    
     }
     
     

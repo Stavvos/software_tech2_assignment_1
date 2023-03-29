@@ -86,6 +86,13 @@ public class Meter
         return tenantMeterNumber; 
     }
     
+     public int getTenantMeterNumberInt()
+    {
+        //clean the string of the "m" at the front, and convert it to an integer for the sorting routine
+        int tenantMeterNumberInt = Integer.parseInt(tenantMeterNumber.substring(1));
+        return tenantMeterNumberInt; 
+    }
+    
     public void setTenantMeterNumber(String newTenantMeterNumber)
     {
       this.tenantMeterNumber = newTenantMeterNumber; 
