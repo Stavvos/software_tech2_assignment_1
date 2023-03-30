@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Print
+comment1.params=
+comment1.target=Print()
+comment2.params=flatObjects
+comment2.target=void\ testingSearch(java.util.ArrayList)
+comment3.params=tenantMeterObjects
+comment3.target=void\ testingSort(java.util.ArrayList)
+comment4.params=counter
+comment4.target=void\ testingFlatFigures(Counter)
+comment5.params=newMeterObjectList
+comment5.target=void\ printingTestMeterObjects(java.util.ArrayList)
+comment6.params=newFlatObjectList
+comment6.target=void\ printingTestFlatObjects(java.util.ArrayList)
+numComments=7

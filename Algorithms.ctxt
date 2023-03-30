@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Algorithms
+comment1.params=
+comment1.target=Algorithms()
+comment2.params=meterObjects
+comment2.target=void\ sortMeterFile(java.util.ArrayList)
+comment3.params=flatObjects\ searchTermStreet\ searchTermBuildingNumber
+comment3.target=int\ findAddress(java.util.ArrayList,\ java.lang.String,\ int)
+numComments=4
