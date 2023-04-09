@@ -16,7 +16,13 @@ public class Meter
     public String previousReadingDate; 
     
     public int currentReading;
-    public int previousReading; 
+    public int previousReading;
+    
+    public double usage; 
+    public double percentage;
+    public double adjustedBillAmount; 
+    public double totalBillAmount; 
+    public double bill; 
     
    
      public Meter()
@@ -39,6 +45,55 @@ public class Meter
       */
     }
     
+     public void setBill(double newBill)
+    {
+      this.bill = newBill; 
+    }
+    
+    public double getBill()
+    {
+      return bill; 
+    }
+    
+    public void setTotalBillAmount(double newTotalBillAmount)
+    {
+      this.totalBillAmount = newTotalBillAmount; 
+    }
+    
+    public double getTotalBillAmount()
+    {
+      return totalBillAmount; 
+    }
+    
+    public void setAdjustedBillAmount(double newAdjustedBillAmount)
+    {
+      this.adjustedBillAmount = newAdjustedBillAmount; 
+    }
+    
+     public double getAdjustedBillAmount()
+    {
+      return adjustedBillAmount; 
+    }
+    
+    public void setUsage(double newUsage)
+    {
+      this.usage = newUsage; 
+    }
+    
+    public double getUsage()
+    {
+      return usage; 
+    }
+    
+     public void setPercentage(double newPercentage)
+    {
+      this.percentage = newPercentage; 
+    }
+    
+    public double getPercentage()
+    {
+      return percentage; 
+    }
     
     //getter and setter methods for this class Meter
      public String getHonorificName()

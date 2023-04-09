@@ -17,6 +17,9 @@ public class Flat
     public int currentReading; 
     public int previousReading;
     
+    public double usage;
+    public double bill; 
+    
     public Flat( )
     {
          /*
@@ -36,6 +39,25 @@ public class Flat
     
     }
     
+    public void setBill(double newBill)
+    {
+     this.bill = newBill; 
+    }
+    
+    public double getBill()
+    {
+      return bill; 
+    }
+    
+    public void setUsage(double newUsage)
+    {
+     this.usage = newUsage; 
+    }
+    
+    public double getUsage()
+    {
+      return usage; 
+    }
     
     //getter and setter methods for this class Flat
     public ArrayList<String> getTenantMetersList() {
