@@ -67,7 +67,7 @@ public class Main
         //**extra not needed for final*****
         // ****Q3a testing sort functionality, seems to be working **** 
         
-        /* seems to be working but sometimes the binary search is slower
+         /*//seems to be working but sometimes the binary search is slower
         //*******Q3b prove how fast the sort and search is for 10000 records 
          long start;
          long end;
@@ -109,17 +109,32 @@ public class Main
        //*************Q4compute the bill for one requested flat, showing all tenants in the flat and their adjusted bills this
        //*************is based on both files the Flat file and the meter file
         
-         read.readFromFlatFiles(flatObjects, flatCounter); 
+         //read.readFromFlatFiles(flatObjects, flatCounter); 
        
-         read.readFromMeterFiles(tenantMeterObjects, meterCounter);
+         //read.readFromMeterFiles(tenantMeterObjects, meterCounter);
          
-         algo.sortMeterFile(tenantMeterObjects); //sort before the binary search
+         //algo.sortMeterFile(tenantMeterObjects); //sort before the binary search
+         
+         //int found = algo.findAddress(flatObjects, "The Causeway", 12);
+         
+         //System.out.println(found); 
+         
        
-         algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects); 
+         //algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects, "Beaconsfield Road", 9); 
          
-        // algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects, streetName, streetNumber);
+         //algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects, "Bright Street", 10);
          
-        //*************Q4 seems to be working but need to make the perentages equal to rob's example 
+         //************************************************************************
+         //note: this test was tricky because there was an error within the prod_flat.txt file
+         //the street name and building numbers both need to be in order, however the building numbers were not in order for this case
+         //of "The Causeway" 
+         //solution: decided to just reconfigure the prod_flat.txt file rather than change the binarySearch algo to save time. 
+         //could've used sequential search to avoid this error as well. 
+         //definitely metion this in the report.
+         //************************************************************************
+         //algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects, "The Causeway", 12); 
+        //*************Q4 seems to be working well and looks like the pictures 
+        //************** but need to make the perentages equal to rob's example if possible
         
           
         //***************Q5 compute bills for all of the flats total and all the adjusted tenant's total

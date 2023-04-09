@@ -88,34 +88,47 @@ public class Print
     public void printBillPositiveDifference(Flat flatBlock, ArrayList<Meter> foundMeterObjects, double rates, double totalTennantbills,
     double differenceOfTotals, double adjustedTotalTennantBills, int lengthOfFoundMeters)
     {
+        int usageInt = (int) flatBlock.getUsage(); 
         
-        System.out.printf("Showing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
+        System.out.printf("\n\nShowing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
         System.out.println("----------------------------------------------");
         System.out.printf("Current meter reading %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
         System.out.printf("Previous meter reading %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
-        System.out.println("Usage: " + flatBlock.getUsage()); 
+        System.out.println("Usage: " + usageInt); 
         System.out.println("Rate: " + rates + "/kwh");
-        System.out.println("Bill Usage: " + "$" + flatBlock.getBill() + "\n\n"); 
+        System.out.printf("Bill Usage: $%.2f \n\n\n", flatBlock.getBill()); 
         
-        System.out.println("---------------------------------------------------------------------------");
+        String title1 = "Tenant";
+        String title2 = "meter";
+        String title3 = "curr";
+        String title4 = "prev";
+        String title5 = "usage";
+        String title6 = "pcnt%";
+        String title7 = "$base";
+        String title8 = "$adj";
+        String title9 = "$total";
+        
+        System.out.printf("%-30s %-8s %-7s %-9s %-9s %-9s %-11s %-10s %-6s \n", title1, title2, title3, title4, title5, 
+        title6, title7, title8, title9);
+        
+        String line = "-".repeat(108); 
+        System.out.println(line);
+        String percentageSymbol = "%";
+        String dollarSymbol = "$"; 
+        
         for (int i = 0; i < lengthOfFoundMeters; i++)
         {
           Meter meter = foundMeterObjects.get(i);
-          System.out.printf("%s %s %s %s %d %d %.2f %.2f %.2f %.2f %.2f \n", meter.getHonorificName(),meter.getFirstName(),meter.getLastName(),
-          meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), meter.getUsage(), meter.getPercentage(),
-          meter.getBill(), meter.getAdjustedBillAmount(), meter.getTotalBillAmount() );
-          
-          /*System.out.println(meter.getHonorificName()+ " " + meter.getFirstName() + " " + meter.getLastName() + " " + 
-          meter.getTenantMeterNumber() + " "
-          + meter.getCurrentReading() + " " + meter.getPreviousReading() + " " 
-          + meter.getUsage() + " " + meter.getPercentage() + " " + meter.getBill() + " " + meter.getAdjustedBillAmount() + 
-          " " +  meter.getTotalBillAmount()); */
+          int usageMeterInt = (int) meter.getUsage(); 
+          System.out.printf("%-4s %-12s %-12s %-8s %-7d %-9d %-9d %-5.2f%-4s %-6.2f%-5s %-4.2f%-6s %-6.2f$ \n", 
+          meter.getHonorificName(),meter.getFirstName(),meter.getLastName(),
+          meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), usageMeterInt, meter.getPercentage(),percentageSymbol,
+          meter.getBill(), dollarSymbol, meter.getAdjustedBillAmount(), dollarSymbol, meter.getTotalBillAmount());
         }
         
-        System.out.println("\nTotal tennant bills (metered): " + totalTennantbills);
-        System.out.println("Total tennant bills diff: " + differenceOfTotals);
-        System.out.println("Total tennant bills adjusted: " + adjustedTotalTennantBills);
-    
+        System.out.printf("\nTotal tennant bills (metered): %.2f \n" , totalTennantbills);
+        System.out.printf("Total tennant bills diff: %.2f \n" , differenceOfTotals);
+        System.out.printf("Total tennant bills adjusted: %.2f \n" , adjustedTotalTennantBills);
     }
     
     //Q4 for the case of a negetive differrence 
@@ -123,7 +136,7 @@ public class Print
     double differenceOfTotals, double adjustedTotalTennantBills, int lengthOfFoundMeters)
     {
       
-        System.out.println(); 
+        /*System.out.println(); 
         System.out.println("Usage: " + flatBlock.getUsage()); 
         System.out.println("Rate: " + rates);
         System.out.println("Bill Usage: " + flatBlock.getBill() + "\n\n"); 
@@ -138,8 +151,49 @@ public class Print
           Meter meter = foundMeterObjects.get(i);
           System.out.println(meter.getTenantMeterNumber() + " " + meter.getUsage() + " " + meter.getPercentage() + " " + meter.getBill() 
           + " " + meter.getAdjustedBillAmount() + " " + meter.getBill());
+        } */
+        
+        int usageInt = (int) flatBlock.getUsage();
+        
+        System.out.printf("\n\nShowing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
+        System.out.println("----------------------------------------------");
+        System.out.printf("Current meter reading %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
+        System.out.printf("Previous meter reading %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
+        System.out.println("Usage: " + usageInt); 
+        System.out.println("Rate: " + rates + "/kwh");
+        System.out.printf("Bill Usage: $%.2f \n\n\n", flatBlock.getBill()); 
+        
+        String title1 = "Tenant";
+        String title2 = "meter";
+        String title3 = "curr";
+        String title4 = "prev";
+        String title5 = "usage";
+        String title6 = "pcnt%";
+        String title7 = "$base";
+        String title8 = "$adj";
+        String title9 = "$total";
+        
+        System.out.printf("%-30s %-8s %-7s %-9s %-9s %-9s %-11s %-10s %-6s \n", title1, title2, title3, title4, title5, 
+        title6, title7, title8, title9);
+        
+        String line = "-".repeat(108); 
+        System.out.println(line);
+        String percentageSymbol = "%";
+        String dollarSymbol = "$"; 
+        
+        for (int i = 0; i < lengthOfFoundMeters; i++)
+        {
+          Meter meter = foundMeterObjects.get(i);
+          int usageMeterInt = (int) meter.getUsage(); 
+          System.out.printf("%-4s %-12s %-12s %-8s %-7d %-9d %-9d %-5.2f%-4s %-6.2f%-5s %-4.2f%-6s %-6.2f$ \n", 
+          meter.getHonorificName(),meter.getFirstName(),meter.getLastName(),
+          meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), usageMeterInt, meter.getPercentage(),percentageSymbol,
+          meter.getBill(), dollarSymbol, meter.getAdjustedBillAmount(), dollarSymbol, meter.getBill());
         }
-    
+        
+        System.out.printf("\nTotal tennant bills (metered): %.2f \n" , totalTennantbills);
+        System.out.printf("Total tennant bills diff: %.2f \n" , differenceOfTotals);
+        System.out.printf("Total tennant bills adjusted: %.2f \n" , adjustedTotalTennantBills);
     }
     
     //a method for testing the binary search function

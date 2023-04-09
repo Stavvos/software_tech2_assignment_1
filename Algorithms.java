@@ -135,9 +135,10 @@ public class Algorithms
     //Q4 calculate bill for an entire flat block, calculate each tennant's bill, find sm of each tenant's bill, 
     //find difference of entire flat block bill and the sum, distirubute the difference to each tennant according to their
     //percentage of usage related to the flat block's usage
-    public void adjustedBillForFlatBlock(ArrayList<Flat> flatObjects, ArrayList<Meter> meterObjects)
+    public void adjustedBillForFlatBlock(ArrayList<Flat> flatObjects, ArrayList<Meter> meterObjects, String streetName, int streetNumber)
     {
         
+        /*
         //***********************User input*************************
         int streetNumber; 
         String streetName;
@@ -156,7 +157,7 @@ public class Algorithms
         
         streetName = in.nextLine();
         //***********************User input*************************
-        
+        */
         
         int objectIndex = findAddress(flatObjects, streetName, streetNumber); //find the flat object
         
