@@ -1,4 +1,7 @@
 import java.util.*; 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 
 public class Print
@@ -48,40 +51,6 @@ public class Print
         System.out.printf("%-5d %-27s $%-12.2f $%-13.2f $%-10.2f $%-9.2f \n", flatBlock.getBuildingNumber(), 
         flatBlock.getStreet(), flatBlock.getBill(), differenceOfTotals, differenceOfTotalsAdjusted, adjustedTotalTennantBills); 
        
-    }
-    
-    //Method for finding and returning a flat object 
-    //note: probably should be in algorithms class and not this one
-    public Flat searchFlat(ArrayList<Flat> flatObjects)
-    {
-        //flat object to be initialised and returned if the binary search finds the flat the user is looking for
-        Flat foundFlat = new Flat(); 
-        
-        String searchAddress; 
-        System.out.println("Enter the street name you're searching for: ");
-        searchAddress = in.nextLine(); 
-        
-        int searchStreetNumber; 
-        System.out.println("Enter the street number you're looking for: "); 
-        searchStreetNumber = in.nextInt(); 
-        
-        //create an Algorithms object to access the findAddress() method. 
-        Algorithms search = new Algorithms(); 
-        
-        int resultOfAddressSearch = search.findAddress(flatObjects, searchAddress, searchStreetNumber); 
-        
-        if (resultOfAddressSearch == -1)
-        {
-           System.out.println("Address not found"); 
-           return null; 
-        }
-        else
-        {
-           //System.out.println("The address was found at index " + resultOfAddressSearch); 
-           foundFlat = flatObjects.get(resultOfAddressSearch);
-           return foundFlat; 
-        }
-    
     }
     
     //for Q4 in the case of a positive bill difference
@@ -227,16 +196,72 @@ public class Print
     // a function for testing the selection sort method
     public void testingSort(ArrayList<Meter> tenantMeterObjects)
     {
-        System.out.println("Check [0] " + tenantMeterObjects.get(0).getFirstName() + " " + tenantMeterObjects.get(0).getLastName()); 
-        System.out.println("Check [9] " + tenantMeterObjects.get(9).getFirstName() + " " + tenantMeterObjects.get(9).getLastName()); 
-        System.out.println("Check last " + tenantMeterObjects.get(15).getFirstName() + " " + tenantMeterObjects.get(15).getLastName());
+           int lastIndex = tenantMeterObjects.size() - 1; 
+            
+            try {
+              // Specify the input date format
+              SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+              
+              // Parse the input date
+              Date inputDate1 = inputFormat.parse(tenantMeterObjects.get(0).getCurrentReadingDate());
+              Date inputDate2 = inputFormat.parse(tenantMeterObjects.get(9).getCurrentReadingDate());
+              Date inputDate3 = inputFormat.parse(tenantMeterObjects.get(lastIndex).getCurrentReadingDate());
+              
+              // Specify the output date format
+              SimpleDateFormat outputFormat = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+        
+              // Set the timezone to AEST
+              outputFormat.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
+        
+              // Format the date to the output format
+              String outputDate1 = outputFormat.format(inputDate1);
+              String outputDate2 = outputFormat.format(inputDate2);
+              String outputDate3 = outputFormat.format(inputDate3);
+              
+              System.out.println("Check [0] " + tenantMeterObjects.get(0).getFirstName() + " " + tenantMeterObjects.get(0).getLastName() 
+              + " " + tenantMeterObjects.get(0).getTenantMeterNumber() + " " + tenantMeterObjects.get(0).getCurrentReading() + " "
+              + outputDate1); 
+            
+              System.out.println("Check [9] " + tenantMeterObjects.get(9).getFirstName() + " " + tenantMeterObjects.get(9).getLastName() 
+              + " " + tenantMeterObjects.get(9).getTenantMeterNumber() + " " + tenantMeterObjects.get(9).getCurrentReading() + " "
+              + outputDate2);
+            
+              System.out.println("Check [ ] " + tenantMeterObjects.get(lastIndex).getFirstName() + " " + tenantMeterObjects.get(lastIndex).getLastName() 
+              + " " + tenantMeterObjects.get(lastIndex).getTenantMeterNumber() + " " + tenantMeterObjects.get(lastIndex).getCurrentReading() 
+              + " " + outputDate3);
+              
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
     }
     
-    public void testingFlatFigures( Counter counter)
+    public void printFlatFigures( Counter counter)
     {
-      System.out.println("The Number of flats read in are: " + counter.getNumberOfFlats());
-      System.out.println("The Number of meters read in are: " + counter.getNumberOfFlatMeters());
-      System.out.println("The sum of all current flats readings is: " + counter.getCurrentReadingsSum());
+      int num =  counter.getCurrentReadingsSum();
+      double numDivided = num / 1e7;
+      String scientificNotation = String.format("%.7fE7", numDivided); 
+      
+      
+      
+      System.out.println("Reading flat file Data/"); // need to insert the file that we're reading in
+      System.out.println("Number of flats read in is: " + counter.getNumberOfFlats());
+      System.out.println("Number of meters read in is: " + counter.getNumberOfFlatMeters());
+      System.out.printf("Total sum (checksum) of all current flats readings is: %s \n", scientificNotation);
+      System.out.println("Total sum (checksum) of all current flats readings is: " + counter.getCurrentReadingsSum());
+    }
+    
+    public void printMeterFigures( Counter counter)
+    {
+      int num =  counter.getCurrentReadingsSum();
+      double numDivided = num / 1e7;
+      String scientificNotation = String.format("%.7fE7", numDivided); 
+      
+      
+      
+      System.out.println("Reading meter file Data/"); // need to insert the file that we're reading in
+      System.out.println("Number of meters read in is: " + counter.getNumberOfFlats());
+      System.out.printf("Total sum (checksum) of all current flats readings is: %s \n", scientificNotation);
+      System.out.println("Total sum (checksum) of all current flats readings is: " + counter.getCurrentReadingsSum());
     }
     
     //function for printing an arraylist of Meter objects
@@ -290,5 +315,27 @@ public class Print
          
          System.out.println(""); 
     
+    }
+    
+    //Q2
+    public void singleFlatBill(Flat flat)
+    {
+        Double previousReading = new Double(flat.getPreviousReading());
+        Double currentReading = new Double(flat.getCurrentReading()); 
+        
+        double rates = 0.205;   
+        double difference = currentReading - previousReading; 
+        double bill = (difference * rates); 
+        
+        int displayDifference = (int)difference; //convert the difference to an int for display 
+        
+        System.out.println("Showing bill for " + flat.getBuildingNumber() + " " + flat.getStreet());
+        System.out.println("------------------------------");
+        System.out.println("Current  meter reading: " + flat.getCurrentReading() + " " + flat.getCurrentReadingDate()); //want displayed as an int
+        System.out.println("Previous meter reading: " + flat.getPreviousReading() + " " + flat.getPreviousReadingDate()); //want displayed as an int
+        System.out.println("Usage:                    " + displayDifference); //display as int
+        System.out.println("Rate:                               " + rates + "/kwh"); //display as double
+        System.out.printf ("BillUsage:                   $    %.2f" , bill); //display as double
+        
     }
 }

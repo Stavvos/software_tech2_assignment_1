@@ -23,39 +23,50 @@ public class Main
         
         Algorithms algo = new Algorithms(); 
         
-        //***********random testing i did************************
+        //***********Q1 testing*****************************
         //***feed these objects into the read.readFromFlatFiles(flatObjects, flatCounter) and display.testingFlatFigures(flatCounter);
         //***methods because it will be passed by reference and the variables that are modified will remain modified. 
         Counter flatCounter = new Counter(); 
         Counter meterCounter = new Counter(); 
         
-        //**** for testing search functionality, seems to be working *****
+        //Q1a**************************
+        //#######note that these printing functions should be able to dispay which file has been read in
+        //## other thn that working well
         //read.readFromFlatFiles(flatObjects, flatCounter); 
         
-        //display.testingFlatFigures(flatCounter); //seems to be working
+        //display.printFlatFigures(flatCounter); //seems to be working
         
         //read.readFromMeterFiles(tenantMeterObjects, meterCounter); 
+        //Q1a**************************
         
-       // display.testingFlatFigures(meterCounter); //seems to be working although the formatting is incorrect
-        
-       //display.testingSearch(flatObjects); //seems to be working
+        //Q1b***********************************************
+        //read.readFromMeterFiles(tenantMeterObjects, meterCounter);
+        //display.printMeterFigures(meterCounter);
+        //Q1b***********************************************
         
        //display.printingTestFlatObjects(flatObjects);
-       //***********random testing i did************************
+       //***********Q1 testing**************************
         
          //****task 2a calculate bill for one flat*****
-       /*Flat displayFlat = new Flat(); 
-       displayFlat = display.searchFlat(flatObjects); //searh flat should probably be in algorithms class not print
-       algo.singleFlatBill(displayFlat); */
-       //Note:the binary search algo is case sensitive for the street name
+       //##working well
+       //read.readFromFlatFiles(flatObjects, flatCounter);
+       //Flat displayFlat = new Flat(); 
+       //displayFlat = algo.searchFlat(flatObjects); 
+       //display.singleFlatBill(displayFlat); 
+       //##for some reason the data in the prod_flat.txt file is different when compared to the 
+       //## test_flat.txt file for the case of 10 Balmoral Drive. Mention this in the report. 
+       //##Note:the binary search algo is case sensitive for the street name
        //********************************************
        
        //****task 2b calculate bill for all the flats****
+        //read.readFromFlatFiles(flatObjects, flatCounter);
         //algo.blockOfFlatsBill(flatObjects); 
+        //##working well
        //********************************************
         
-        // ****Q3a testing sort functionality, seems to be working **** 
-       
+        // ****Q3a********************************** 
+        
+        //##works well
         //read.readFromMeterFiles(tenantMeterObjects, meterCounter);
         
         //algo.sortMeterFile(tenantMeterObjects);
@@ -65,10 +76,12 @@ public class Main
         //**extra not needed for final*****
         //display.printingTestMeterObjects(tenantMeterObjects); 
         //**extra not needed for final*****
-        // ****Q3a testing sort functionality, seems to be working **** 
+        // ****Q3a********************************** 
         
-         /*//seems to be working but sometimes the binary search is slower
-        //*******Q3b prove how fast the sort and search is for 10000 records 
+        //## Q3 seems to be working but sometimes the binary search is slower
+        /* 
+        //*******Q3b prove how fast the sort and search is for 10000 records ************************ 
+        
          long start;
          long end;
          long diff;
@@ -78,6 +91,10 @@ public class Main
          algo.sortMeterFile(tenantMeterObjects); //run sort if it hasn't been already
          
          System.out.println("\n\n");
+         
+         display.testingSort(tenantMeterObjects);
+         
+         System.out.println("\n\n\n\n\n\n\n\n"); 
          
          //test how long it will tae the sequencialSerch() method from the algorithms class
          start = System.currentTimeMillis();
@@ -89,7 +106,7 @@ public class Main
          }
          end = System.currentTimeMillis(); 
          diff = end - start; 
-         System.out.println("Sequencial search found result after: " + diff + " milliseconds");
+         System.out.println("Find sequential: " + diff + " milliseconds");
          
          //test how long it will tae the findMeterNumberBinary() method from the algorithms class
          start = System.currentTimeMillis();
@@ -101,10 +118,10 @@ public class Main
          }
          end = System.currentTimeMillis(); 
          diff = end - start; 
-         System.out.println("Binary search found result after: " + diff + " milliseconds"); 
-        //******************************************************
-        
+         System.out.println("Find Binary: " + diff + " milliseconds"); 
+        //Q3b******************************************************
         */
+        
        
        //*************Q4compute the bill for one requested flat, showing all tenants in the flat and their adjusted bills this
        //*************is based on both files the Flat file and the meter file
@@ -125,16 +142,16 @@ public class Main
          //algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects, "Bright Street", 10);
          
          //************************************************************************
-         //note: this test was tricky because there was an error within the prod_flat.txt file
-         //the street name and building numbers both need to be in order, however the building numbers were not in order for this case
-         //of "The Causeway" 
-         //solution: decided to just reconfigure the prod_flat.txt file rather than change the binarySearch algo to save time. 
-         //could've used sequential search to avoid this error as well. 
-         //definitely metion this in the report.
+         //#note: this test was tricky because there was an error within the prod_flat.txt file
+         //#the street name and building numbers both need to be in order, however the building numbers were not in order for this case
+         //#of "The Causeway" 
+         //#solution: decided to just reconfigure the prod_flat.txt file rather than change the binarySearch algo to save time. 
+         //#could've used sequential search to avoid this error as well. 
+         //#definitely metion this in the report.
          //************************************************************************
          //algo.adjustedBillForFlatBlock(flatObjects, tenantMeterObjects, "The Causeway", 12); 
         //*************Q4 seems to be working well and looks like the pictures 
-        //************** but need to make the perentages equal to rob's example if possible
+        //# but need to make the perentages equal to rob's example if possible
         
           
         //***************Q5 compute bills for all of the flats total and all the adjusted tenant's total

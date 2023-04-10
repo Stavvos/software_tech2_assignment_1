@@ -268,27 +268,6 @@ public class Algorithms
         
     }
     
-    //calculate the bill for one flat Q2a draft. probably replace with the above method and make a new print() method in the print class
-    //to handle the printing
-    public void singleFlatBill(Flat flat)
-    {
-        Double previousReading = new Double(flat.getPreviousReading());
-        Double currentReading = new Double(flat.getCurrentReading()); 
-        
-        double rates = 0.205;   
-        double difference = currentReading - previousReading; 
-        double bill = (difference * rates); 
-        
-        int displayDifference = (int)difference; //convert the difference to an int for display 
-        
-        System.out.println("Previous reading is: " + flat.getPreviousReading() + " " + flat.getPreviousReadingDate()); //want displayed as an int
-        System.out.println("Current reading is: " + flat.getCurrentReading() + " " + flat.getCurrentReadingDate()); //want displayed as an int
-        System.out.println("Rate is: " + rates); //display as double
-        System.out.println("Usage is: " + displayDifference); //display as int
-        System.out.println("The Bill for the requested flat is: $" + bill); //display as double
-        
-    }
-    
     //Q2b
     public void blockOfFlatsBill(ArrayList<Flat> flatObjects)
     {
@@ -302,6 +281,7 @@ public class Algorithms
         Double previousReading; 
         Double currentReading; 
         int flatsCounter = 0; 
+        
         //work our way down the flatObjects ArrayList and calculate the total bill 
         for (int i = 0; i < length; i ++)
          {
@@ -312,9 +292,15 @@ public class Algorithms
           bill = (difference * rates); 
           billTotal += bill;
          }
-        
-        System.out.printf("Total: $%.2f \n", billTotal); //display as double rounded to 2 decimal places
-        System.out.println("Records processed: " + length); //display the number of flats processed
+        String userInput;
+        String colon = ":"; 
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter number to show for testing only: ");
+        userInput = in.nextLine(); 
+        System.out.println("               Total for all flats                   ");
+        System.out.println("__________________________________");
+        System.out.printf("Total %12s              %,.2f \n", colon, billTotal); //display as double rounded to 2 decimal places
+        System.out.println("Records processed:                     " + length); //display the number of flats processed
     }
     
     //selection sort which is O(n^2) 
@@ -422,5 +408,43 @@ public class Algorithms
                }
             }
             return -1; //use this value if the searchTerm isn't found. 
+    }
+    
+    //Q2
+    //Method for finding and returning a flat object 
+    public Flat searchFlat(ArrayList<Flat> flatObjects)
+    {
+        //flat object to be initialised and returned if the binary search finds the flat the user is looking for
+        Flat foundFlat = new Flat(); 
+        
+        Scanner in = new Scanner(System.in);
+        
+        int searchStreetNumber; 
+        System.out.printf("Enter the street number you're looking for: "); 
+        searchStreetNumber = in.nextInt();
+        
+        in.nextLine(); //have to put this here becaue nextInt() sucks. the in needs to be cleaned
+        
+        String searchAddress; 
+        System.out.printf("Enter the street name you're searching for: ");
+        searchAddress = in.nextLine(); 
+        
+        //create an Algorithms object to access the findAddress() method. 
+        Algorithms search = new Algorithms(); 
+        
+        int resultOfAddressSearch = search.findAddress(flatObjects, searchAddress, searchStreetNumber); 
+        
+        if (resultOfAddressSearch == -1)
+        {
+           System.out.println("Address not found"); 
+           return null; 
+        }
+        else
+        {
+           //System.out.println("The address was found at index " + resultOfAddressSearch); 
+           foundFlat = flatObjects.get(resultOfAddressSearch);
+           return foundFlat; 
+        }
+    
     }
 }
