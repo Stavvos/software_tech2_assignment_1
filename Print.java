@@ -60,12 +60,12 @@ public class Print
         int usageInt = (int) flatBlock.getUsage(); 
         
         System.out.printf("\n\nShowing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
-        System.out.println("----------------------------------------------");
-        System.out.printf("Current meter reading %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
-        System.out.printf("Previous meter reading %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
-        System.out.println("Usage: " + usageInt); 
-        System.out.println("Rate: " + rates + "/kwh");
-        System.out.printf("Bill Usage: $%.2f \n\n\n", flatBlock.getBill()); 
+        System.out.println("------------------------------");
+        System.out.printf("Current  meter reading  %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
+        System.out.printf("Previous meter reading  %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
+        System.out.println("Usage:                    " + usageInt); 
+        System.out.println("Rate:                               " + rates + "/kwh");
+        System.out.printf("Bill Usage:                  $    %.2f \n\n\n", flatBlock.getBill()); 
         
         String title1 = "Tenant";
         String title2 = "meter";
@@ -95,42 +95,24 @@ public class Print
           meter.getBill(), dollarSymbol, meter.getAdjustedBillAmount(), dollarSymbol, meter.getTotalBillAmount());
         }
         
-        System.out.printf("\nTotal tennant bills (metered): %.2f \n" , totalTennantbills);
-        System.out.printf("Total tennant bills diff: %.2f \n" , differenceOfTotals);
-        System.out.printf("Total tennant bills adjusted: %.2f \n" , adjustedTotalTennantBills);
+        System.out.printf("\nTotal tennant bills (metered)      %.2f \n" , totalTennantbills);
+        System.out.printf("Total tennant bills diff             %.2f \n" , differenceOfTotals);
+        System.out.printf("Total tennant bills adjusted       %.2f \n" , adjustedTotalTennantBills);
     }
     
     //Q4 for the case of a negetive differrence 
     public void printBillNegativeDifference(Flat flatBlock, ArrayList<Meter> foundMeterObjects, double rates, double totalTennantbills,
     double differenceOfTotals, double adjustedTotalTennantBills, int lengthOfFoundMeters)
     {
-      
-        /*System.out.println(); 
-        System.out.println("Usage: " + flatBlock.getUsage()); 
-        System.out.println("Rate: " + rates);
-        System.out.println("Bill Usage: " + flatBlock.getBill() + "\n\n"); 
-        
-        System.out.println("Total tennant bills (metered): " + totalTennantbills);
-        System.out.println("Total tennant bills diff: " + differenceOfTotals);
-        System.out.println("Total tennant bills adjusted: " + adjustedTotalTennantBills);
-        
-        System.out.println("---------------------------------------------------------------------------");
-        for (int i = 0; i < lengthOfFoundMeters; i++)
-        {
-          Meter meter = foundMeterObjects.get(i);
-          System.out.println(meter.getTenantMeterNumber() + " " + meter.getUsage() + " " + meter.getPercentage() + " " + meter.getBill() 
-          + " " + meter.getAdjustedBillAmount() + " " + meter.getBill());
-        } */
-        
         int usageInt = (int) flatBlock.getUsage();
         
         System.out.printf("\n\nShowing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
-        System.out.println("----------------------------------------------");
-        System.out.printf("Current meter reading %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
-        System.out.printf("Previous meter reading %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
-        System.out.println("Usage: " + usageInt); 
-        System.out.println("Rate: " + rates + "/kwh");
-        System.out.printf("Bill Usage: $%.2f \n\n\n", flatBlock.getBill()); 
+        System.out.println("------------------------------");
+        System.out.printf("Current  meter reading  %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
+        System.out.printf("Previous meter reading  %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
+        System.out.println("Usage:                    " + usageInt); 
+        System.out.println("Rate:                               " + rates + "/kwh");
+        System.out.printf("Bill Usage:                  $    %.2f \n\n\n", flatBlock.getBill()); 
         
         String title1 = "Tenant";
         String title2 = "meter";
@@ -160,9 +142,9 @@ public class Print
           meter.getBill(), dollarSymbol, meter.getAdjustedBillAmount(), dollarSymbol, meter.getBill());
         }
         
-        System.out.printf("\nTotal tennant bills (metered): %.2f \n" , totalTennantbills);
-        System.out.printf("Total tennant bills diff: %.2f \n" , differenceOfTotals);
-        System.out.printf("Total tennant bills adjusted: %.2f \n" , adjustedTotalTennantBills);
+        System.out.printf("\nTotal tennant bills (metered)      %.2f \n" , totalTennantbills);
+        System.out.printf("Total tennant bills diff            %.2f \n" , differenceOfTotals);
+        System.out.printf("Total tennant bills adjusted       %.2f \n" , adjustedTotalTennantBills);
     }
     
     //a method for testing the binary search function
@@ -235,7 +217,7 @@ public class Print
             }
     }
     
-    public void printFlatFigures( Counter counter)
+    public void printFlatFigures( Counter counter, String fileName)
     {
       int num =  counter.getCurrentReadingsSum();
       double numDivided = num / 1e7;
@@ -243,14 +225,14 @@ public class Print
       
       
       
-      System.out.println("Reading flat file Data/"); // need to insert the file that we're reading in
+      System.out.println("Reading flat file Data/" + fileName); // need to insert the file that we're reading in
       System.out.println("Number of flats read in is: " + counter.getNumberOfFlats());
       System.out.println("Number of meters read in is: " + counter.getNumberOfFlatMeters());
       System.out.printf("Total sum (checksum) of all current flats readings is: %s \n", scientificNotation);
       System.out.println("Total sum (checksum) of all current flats readings is: " + counter.getCurrentReadingsSum());
     }
     
-    public void printMeterFigures( Counter counter)
+    public void printMeterFigures( Counter counter, String fileName)
     {
       int num =  counter.getCurrentReadingsSum();
       double numDivided = num / 1e7;
@@ -258,7 +240,7 @@ public class Print
       
       
       
-      System.out.println("Reading meter file Data/"); // need to insert the file that we're reading in
+      System.out.println("Reading meter file Data/" + fileName); // need to insert the file that we're reading in
       System.out.println("Number of meters read in is: " + counter.getNumberOfFlats());
       System.out.printf("Total sum (checksum) of all current flats readings is: %s \n", scientificNotation);
       System.out.println("Total sum (checksum) of all current flats readings is: " + counter.getCurrentReadingsSum());

@@ -15,7 +15,7 @@ public class Main
     public Main()
     {
       System.out.println("\f"); 
-       
+      
         // declaring objects so that their methods cn be accessed
         ReadFile read = new ReadFile(); 
         
@@ -154,9 +154,9 @@ public class Main
         //# but need to make the perentages equal to rob's example if possible
         
           
-        //***************Q5 compute bills for all of the flats total and all the adjusted tenant's total
+         //***************Q5 compute bills for all of the flats total and all the adjusted tenant's total
         
-        //read.readFromFlatFiles(flatObjects, flatCounter); 
+         //read.readFromFlatFiles(flatObjects, flatCounter); 
        
          //read.readFromMeterFiles(tenantMeterObjects, meterCounter);
          
@@ -167,7 +167,9 @@ public class Main
          //********************************* working well just need to place the $ symbol behind the dollar amounts not infront
          
         
-       
+         Menu menu = new Menu();
+         
+         //menu.Menu(); 
     
     }
     

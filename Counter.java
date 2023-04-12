@@ -14,7 +14,23 @@ public class Counter
        currentReadingsTotal = 0; 
     }
     
-    public void incrementNumberOfObjects()
+    public void resetNumberOfObjects()
+    {
+     numberOfObjects = 0; 
+    }
+    
+    public void resetNumberOfFlatMeters()
+    {
+     numberOfFlatMeters = 0; 
+    }
+    
+    public void resetCurrentReadingsTotal( )
+    {
+       currentReadingsTotal = 0; 
+    }
+    
+    
+     public void incrementNumberOfObjects()
     {
        numberOfObjects++; 
     }

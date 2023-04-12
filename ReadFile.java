@@ -19,7 +19,7 @@ public class ReadFile
     }
      
     //function for reading the flat CSV files
-    public void readFromFlatFiles(ArrayList<Flat> flatObjects, Counter flatCounter)
+    public void readFromFlatFiles(ArrayList<Flat> flatObjects, Counter flatCounter, String fileName)
     {
         //values for tokenized array
         String street;   
@@ -32,9 +32,9 @@ public class ReadFile
         int currentReading; 
         int previousReading; 
         
-        System.out.println("Enter the file name you'd like the program to read: "); 
+        //System.out.println("Enter the file name you'd like the program to read: "); 
         
-        fileName = in.nextLine(); 
+        //fileName = in.nextLine(); 
         
         try{
         
@@ -114,7 +114,7 @@ public class ReadFile
     
     
     //function for reading the CSV Meter files
-    public void readFromMeterFiles(ArrayList<Meter> tenantMeterObjects, Counter meterCounter)
+    public void readFromMeterFiles(ArrayList<Meter> tenantMeterObjects, Counter meterCounter, String fileName)
     {
         
         //values for tokenized array
@@ -130,9 +130,9 @@ public class ReadFile
         int previousReading;
         
         
-        System.out.println("Enter the file name you'd like the program to read: "); 
+        //System.out.println("Enter the file name you'd like the program to read: "); 
         
-        fileName = in.nextLine(); 
+        //fileName = in.nextLine(); 
         
         try{
         

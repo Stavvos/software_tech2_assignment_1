@@ -137,28 +137,6 @@ public class Algorithms
     //percentage of usage related to the flat block's usage
     public void adjustedBillForFlatBlock(ArrayList<Flat> flatObjects, ArrayList<Meter> meterObjects, String streetName, int streetNumber)
     {
-        
-        /*
-        //***********************User input*************************
-        int streetNumber; 
-        String streetName;
-        
-        Scanner in = new Scanner(System.in);
-        
-        System.out.println("Compute Ajusted bill for one Block of flats \n\n");
-        
-        System.out.println("Enter street number: ");
-        
-        streetNumber = in.nextInt();
-        
-        in.nextLine(); //was having issues with nextInt doing something weird involving an empty string input, this solved the issue. 
-        
-        System.out.println("Enter street name: ");
-        
-        streetName = in.nextLine();
-        //***********************User input*************************
-        */
-        
         int objectIndex = findAddress(flatObjects, streetName, streetNumber); //find the flat object
         
         Flat flatBlock = flatObjects.get(objectIndex); // create a flat object and assign its value to the found flat object above
@@ -390,7 +368,9 @@ public class Algorithms
             {
                int middle = left + (right - left) / 2;
                
-               int result = searchTermStreet.compareTo(flatObjects.get(middle).getStreet()); //use compareTo() for comparing string
+               //use compareToIgnoreCase() for comparing strings and handling lower or uppercase input
+               int result = searchTermStreet.compareToIgnoreCase(flatObjects.get(middle).getStreet()); 
+               
                
                if (result == 0  && flatObjects.get(middle).getBuildingNumber() == searchTermBuildingNumber)
                {
@@ -420,13 +400,13 @@ public class Algorithms
         Scanner in = new Scanner(System.in);
         
         int searchStreetNumber; 
-        System.out.printf("Enter the street number you're looking for: "); 
+        System.out.printf("Enter the street number: "); 
         searchStreetNumber = in.nextInt();
         
         in.nextLine(); //have to put this here becaue nextInt() sucks. the in needs to be cleaned
         
         String searchAddress; 
-        System.out.printf("Enter the street name you're searching for: ");
+        System.out.printf("Enter the street name: ");
         searchAddress = in.nextLine(); 
         
         //create an Algorithms object to access the findAddress() method. 
@@ -446,5 +426,47 @@ public class Algorithms
            return foundFlat; 
         }
     
+    }
+    
+    public void proveSearch(ArrayList tenantMeterObjects)
+    {
+        long start;
+         long end;
+         long diff;
+         
+         Print display = new Print(); 
+         
+         sortMeterFile(tenantMeterObjects); //run sort in case it hasn't been run already
+         
+         System.out.println("\n\n");
+         
+         display.testingSort(tenantMeterObjects);
+         
+         System.out.println("\n\n\n\n\n\n\n\n"); 
+         
+         //test how long it will tae the sequencialSerch() method from the algorithms class
+         start = System.currentTimeMillis();
+         for (int i = 0; i <30000; i++)
+         {
+           int test1 = Algorithms.sequencialSearch(tenantMeterObjects ,"m163987");
+           int test2 = Algorithms.sequencialSearch(tenantMeterObjects ,"m163966");
+           int test3 = Algorithms.sequencialSearch(tenantMeterObjects ,"m163973");
+         }
+         end = System.currentTimeMillis(); 
+         diff = end - start; 
+         System.out.println("Find sequential: " + diff + " milliseconds");
+         
+         //test how long it will tae the findMeterNumberBinary() method from the algorithms class
+         start = System.currentTimeMillis();
+         for (int i = 0; i < 30000; i++)
+         {
+           int test1 = Algorithms.findMeterNumberBinary(tenantMeterObjects ,"m163987");
+           int test2 = Algorithms.findMeterNumberBinary(tenantMeterObjects ,"m163966");
+           int test3 = Algorithms.findMeterNumberBinary(tenantMeterObjects ,"m163973");  
+         }
+         end = System.currentTimeMillis(); 
+         diff = end - start; 
+         System.out.println("Find Binary: " + diff + " milliseconds"); 
+        //Q3b******************************************************
     }
 }
