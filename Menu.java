@@ -44,26 +44,28 @@ public class Menu
         
         if (menuOpt.compareToIgnoreCase("A") == 0) 
         {
+            //##formatted correctly
+            System.out.println("Compute bill for all blocks of flats \n");
             algo.blockOfFlatsBill(flatObjects); 
-            //##working well
         }
         
         
         if (menuOpt.compareToIgnoreCase("C") == 0 )
         {
-        //read.readFromFlatFiles(flatObjects, flatCounter);
+            //##formatted correctly
+            Flat displayFlat = new Flat();
+            System.out.println("Compute bill for one block of flats");
+            displayFlat = algo.searchFlat(flatObjects); 
+            display.singleFlatBill(displayFlat); //strange bug where there's an E after the bill value?
         
-        Flat displayFlat = new Flat(); 
-        displayFlat = algo.searchFlat(flatObjects); 
-        display.singleFlatBill(displayFlat); //strange bug where there's an E after the bill value?
-    
-        //##for some reason the data in the prod_flat.txt file is different when compared to the 
-        //## test_flat.txt file for the case of 10 Balmoral Drive. Mention this in the report. 
-        //##Note:the binary search algo is case sensitive for the street name
+            //##for some reason the data in the prod_flat.txt file is different when compared to the 
+            //## test_flat.txt file for the case of 10 Balmoral Drive. Mention this in the report. 
+            //##Note:the binary search algo is case sensitive for the street name
         }
         
         if(menuOpt.compareToIgnoreCase("M") == 0)
         {
+         //##formatted correctly
          //clear the arrayList before it's values are set to avoid errors when reusing it   
          tenantMeterObjects.clear(); 
          
@@ -81,6 +83,7 @@ public class Menu
         
         if(menuOpt.compareToIgnoreCase("F") == 0)
         {
+         //##formatted correctly
          //clear the arrayList before it's values are set to avoid errors when reusing it   
          flatObjects.clear();
          
@@ -98,7 +101,7 @@ public class Menu
         
         if (menuOpt.compareToIgnoreCase("S") == 0 )
         {
-            
+         //## formatted correctly
         algo.sortMeterFile(tenantMeterObjects);
         display.testingSort(tenantMeterObjects);  
         
@@ -109,14 +112,14 @@ public class Menu
         
         if (menuOpt.compareToIgnoreCase("P") == 0 )
         {
-         
+         //## formatted correctly
          algo.proveSearch(tenantMeterObjects);
         
         }
         
         if (menuOpt.compareToIgnoreCase("O") == 0 )
         {
-         //## this seems to work well however the formatting of the bill needs improvement
+         //## formatted correctly apart from spacing in between tenant and meter fields but shouldn't matter too much
          //## also note that for some reason 10 bright street has different meters when using the prod_flat.txt and test_flat.txt files
          int streetNumber;
          String streetName; 
@@ -150,7 +153,7 @@ public class Menu
         
         if (menuOpt.compareToIgnoreCase("5") == 0 )
         {
-          
+          //##formatted correctly
          
          algo.sortMeterFile(tenantMeterObjects); //sort before the binary search
          

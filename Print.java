@@ -2,6 +2,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import java.text.DecimalFormat;
 
 
 public class Print
@@ -18,12 +19,18 @@ public class Print
     //Q5 printing function for footer
     public void printFooter(double BcBill, double difference, double DiffAdj, double tenantBill)
     {
-     String line = "-".repeat(88); 
-     System.out.printf("%-88s \n", line);
+     DecimalFormat df = new DecimalFormat("0.00"); //use this for rounding the strings to 2 decimal places
+     String billString = df.format(BcBill) + "$";
+     String differenceString = df.format(difference) + "$";
+     String DiffAdjString = df.format(DiffAdj) + "$";
+     String tenantBillString = df.format(tenantBill) + "$";
+        
+     String line = "-".repeat(83); 
+     System.out.printf("%-83s \n", line);
      String space = " "; 
-     //System.out.printf("%-31s %-12.2f %-13.2f %-10.2f %-9.2f \n", space, BcBill, "$" ,  difference, "$",DiffAdj, "$", tenantBill, "$");
      
-     System.out.printf("%-31s $%-12.2f $%-13.2f $%-10.2f $%-9.2f \n", space, BcBill, difference,DiffAdj,tenantBill);
+     System.out.printf("%41s %13s %12s %14s \n", billString, differenceString,
+     DiffAdjString,tenantBillString);
     
 
     }
@@ -37,7 +44,7 @@ public class Print
      String difference = "Difference"; 
      String differenceAdjusted = "DiffAdj"; 
      String tenantBill = "Tenant Bill"; 
-     String line = "-".repeat(88); 
+     String line = "-".repeat(83); 
      
      System.out.printf("%-5s %-27s %-12s %-13s %-10s %-9s  \n", flat, address, BcBill, difference, differenceAdjusted, tenantBill);
      System.out.printf("%-88s \n", line); 
@@ -48,8 +55,16 @@ public class Print
     public void printAdjustedTotalsForAllFlats(Flat flatBlock,  double adjustedTotalTennantBills, 
     double differenceOfTotalsAdjusted, double differenceOfTotals)
     {
-        System.out.printf("%-5d %-27s $%-12.2f $%-13.2f $%-10.2f $%-9.2f \n", flatBlock.getBuildingNumber(), 
-        flatBlock.getStreet(), flatBlock.getBill(), differenceOfTotals, differenceOfTotalsAdjusted, adjustedTotalTennantBills); 
+        DecimalFormat df = new DecimalFormat("0.00"); //use this for rounding the strings to 2 decimal places
+        //String bill = Double.toString(flatBlock.getBill());
+        String bill = df.format(flatBlock.getBill()) + "$";
+        String differenceOfTotalsString = df.format(differenceOfTotals) + "$";
+        String differenceOfTotalsAdjustedString = df.format(differenceOfTotalsAdjusted) + "$";
+        String adjustedTotalTennantBillsString = df.format(adjustedTotalTennantBills) + "$";
+        
+        System.out.printf("%5d %22s %12s %13s %12s %14s \n", flatBlock.getBuildingNumber(), 
+        flatBlock.getStreet(), /*flatBlock.getBill()*/ bill, differenceOfTotalsString, 
+        differenceOfTotalsAdjustedString, adjustedTotalTennantBillsString); 
        
     }
     
@@ -57,15 +72,15 @@ public class Print
     public void printBillPositiveDifference(Flat flatBlock, ArrayList<Meter> foundMeterObjects, double rates, double totalTennantbills,
     double differenceOfTotals, double adjustedTotalTennantBills, int lengthOfFoundMeters)
     {
-        int usageInt = (int) flatBlock.getUsage(); 
-        
+        int usageInt = (int) flatBlock.getUsage();
+        String dollar = "$"; 
         System.out.printf("\n\nShowing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
         System.out.println("------------------------------");
         System.out.printf("Current  meter reading  %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
         System.out.printf("Previous meter reading  %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
-        System.out.println("Usage:                    " + usageInt); 
-        System.out.println("Rate:                               " + rates + "/kwh");
-        System.out.printf("Bill Usage:                  $    %.2f \n\n\n", flatBlock.getBill()); 
+        System.out.printf("Usage: %23d \n" , usageInt); 
+        System.out.printf("Rate:  %34s/kwh \n" , rates);
+        System.out.printf("Bill Usage:                  %-4s %.2f \n\n\n",dollar, flatBlock.getBill()); 
         
         String title1 = "Tenant";
         String title2 = "meter";
@@ -77,7 +92,7 @@ public class Print
         String title8 = "$adj";
         String title9 = "$total";
         
-        System.out.printf("%-30s %-8s %-7s %-9s %-9s %-9s %-11s %-10s %-6s \n", title1, title2, title3, title4, title5, 
+        System.out.printf("%-31s %-7s %-7s %-9s %-9s %-9s %-11s %-10s %-7s \n", title1, title2, title3, title4, title5, 
         title6, title7, title8, title9);
         
         String line = "-".repeat(108); 
@@ -89,9 +104,10 @@ public class Print
         {
           Meter meter = foundMeterObjects.get(i);
           int usageMeterInt = (int) meter.getUsage(); 
-          System.out.printf("%-4s %-12s %-12s %-8s %-7d %-9d %-9d %-5.2f%-4s %-6.2f%-5s %-4.2f%-6s %-6.2f$ \n", 
-          meter.getHonorificName(),meter.getFirstName(),meter.getLastName(),
-          meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), usageMeterInt, meter.getPercentage(),percentageSymbol,
+          String name = meter.getHonorificName() + " " + meter.getFirstName() + " " + meter.getLastName();
+          System.out.printf("%26s %12s %-7d %-9d %-9d %-5.2f%-4s %-6.2f%-5s %-4.2f%-6s %-6.2f$ \n", 
+          name, meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), 
+          usageMeterInt, meter.getPercentage(),percentageSymbol,
           meter.getBill(), dollarSymbol, meter.getAdjustedBillAmount(), dollarSymbol, meter.getTotalBillAmount());
         }
         
@@ -105,14 +121,14 @@ public class Print
     double differenceOfTotals, double adjustedTotalTennantBills, int lengthOfFoundMeters)
     {
         int usageInt = (int) flatBlock.getUsage();
-        
+        String dollar = "$"; 
         System.out.printf("\n\nShowing Bill for %d %s \n\n", flatBlock.getBuildingNumber(), flatBlock.getStreet()); 
         System.out.println("------------------------------");
         System.out.printf("Current  meter reading  %d %s \n", flatBlock.getCurrentReading(), flatBlock.getCurrentReadingDate());
         System.out.printf("Previous meter reading  %d %s \n", flatBlock.getPreviousReading(), flatBlock.getPreviousReadingDate());
-        System.out.println("Usage:                    " + usageInt); 
-        System.out.println("Rate:                               " + rates + "/kwh");
-        System.out.printf("Bill Usage:                  $    %.2f \n\n\n", flatBlock.getBill()); 
+        System.out.printf("Usage: %23d \n" , usageInt); 
+        System.out.printf("Rate:  %34s/kwh \n" , rates);
+        System.out.printf("Bill Usage:                  %-4s %.2f \n\n\n",dollar, flatBlock.getBill()); 
         
         String title1 = "Tenant";
         String title2 = "meter";
@@ -124,27 +140,32 @@ public class Print
         String title8 = "$adj";
         String title9 = "$total";
         
-        System.out.printf("%-30s %-8s %-7s %-9s %-9s %-9s %-11s %-10s %-6s \n", title1, title2, title3, title4, title5, 
+        System.out.printf("%-31s %-7s %-7s %-9s %-9s %-9s %-11s %-10s %-7s \n", title1, title2, title3, title4, title5, 
         title6, title7, title8, title9);
         
         String line = "-".repeat(108); 
         System.out.println(line);
-        String percentageSymbol = "%";
-        String dollarSymbol = "$"; 
         
+        DecimalFormat df = new DecimalFormat("0.00"); //use this for rounding the strings to 2 decimal places
+            
         for (int i = 0; i < lengthOfFoundMeters; i++)
         {
           Meter meter = foundMeterObjects.get(i);
           int usageMeterInt = (int) meter.getUsage(); 
-          System.out.printf("%-4s %-12s %-12s %-8s %-7d %-9d %-9d %-5.2f%-4s %-6.2f%-5s %-4.2f%-6s %-6.2f$ \n", 
-          meter.getHonorificName(),meter.getFirstName(),meter.getLastName(),
-          meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), usageMeterInt, meter.getPercentage(),percentageSymbol,
-          meter.getBill(), dollarSymbol, meter.getAdjustedBillAmount(), dollarSymbol, meter.getBill());
+          String name = meter.getHonorificName() + " " + meter.getFirstName() + " " + meter.getLastName();
+          String percentage = df.format(meter.getPercentage()) + "%"; 
+          String baseString = df.format(meter.getBill()) + "$"; 
+          String adjustedAmountString = df.format(meter.getAdjustedBillAmount()) + "$"; 
+          
+          System.out.printf("%26s %12s %-7d %-9d %-9d %6s %10s %9s %12s \n", 
+          name, meter.getTenantMeterNumber(), meter.getCurrentReading(), meter.getPreviousReading(), 
+          usageMeterInt, percentage,
+          baseString, adjustedAmountString, baseString);
         }
         
-        System.out.printf("\nTotal tennant bills (metered)      %.2f \n" , totalTennantbills);
-        System.out.printf("Total tennant bills diff            %.2f \n" , differenceOfTotals);
-        System.out.printf("Total tennant bills adjusted       %.2f \n" , adjustedTotalTennantBills);
+        System.out.printf("\nTotal tennant bills (metered) %10.2f \n" , totalTennantbills);
+        System.out.printf("Total tennant bills diff %15.2f \n" , differenceOfTotals);
+        System.out.printf("Total tennant bills adjusted %11.2f \n" , adjustedTotalTennantBills);
     }
     
     //a method for testing the binary search function
@@ -311,13 +332,14 @@ public class Print
         
         int displayDifference = (int)difference; //convert the difference to an int for display 
         
-        System.out.println("Showing bill for " + flat.getBuildingNumber() + " " + flat.getStreet());
-        System.out.println("------------------------------");
-        System.out.println("Current  meter reading: " + flat.getCurrentReading() + " " + flat.getCurrentReadingDate()); //want displayed as an int
-        System.out.println("Previous meter reading: " + flat.getPreviousReading() + " " + flat.getPreviousReadingDate()); //want displayed as an int
-        System.out.println("Usage:                    " + displayDifference); //display as int
-        System.out.println("Rate:                               " + rates + "/kwh"); //display as double
-        System.out.printf ("BillUsage:                   $    %.2f" , bill); //display as double
         
+        String dollar = "$"; 
+        System.out.printf("Showing Bill for %d %s \n", flat.getBuildingNumber(), flat.getStreet()); 
+        System.out.println("------------------------------");
+        System.out.printf("Current  meter reading  %d %s \n", flat.getCurrentReading(), flat.getCurrentReadingDate());
+        System.out.printf("Previous meter reading  %d %s \n", flat.getPreviousReading(), flat.getPreviousReadingDate());
+        System.out.printf("Usage: %23d \n" , displayDifference); 
+        System.out.printf("Rate:  %34s/kwh \n" , rates);
+        System.out.printf("Bill Usage:                  %-4s %.2f \n\n\n",dollar, bill); 
     }
 }

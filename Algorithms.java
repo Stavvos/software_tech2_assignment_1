@@ -124,7 +124,7 @@ public class Algorithms
                     
                      
                     
-                    
+                    //when we're at the fial iteration of the for loop print the totals
                     if(flatBlockIndex == numberOfFlats - 1)
                     {
                     print.printFooter(bcBillTotal, differenceTotal, differencAdjustedTotal,  tenantBillTotal); 
@@ -272,13 +272,11 @@ public class Algorithms
          }
         String userInput;
         String colon = ":"; 
-        Scanner in = new Scanner(System.in);
-        System.out.print("Enter number to show for testing only: ");
-        userInput = in.nextLine(); 
+        String space = " "; 
         System.out.println("               Total for all flats                   ");
         System.out.println("__________________________________");
-        System.out.printf("Total %12s              %,.2f \n", colon, billTotal); //display as double rounded to 2 decimal places
-        System.out.println("Records processed:                     " + length); //display the number of flats processed
+        System.out.printf("Total %12s %-12s %,.2f \n", colon, space, billTotal); //display as double rounded to 2 decimal places
+        System.out.printf("Records processed: %19s %d \n" , space, length); //display the number of flats processed
     }
     
     //selection sort which is O(n^2) 
