@@ -32,10 +32,6 @@ public class ReadFile
         int currentReading; 
         int previousReading; 
         
-        //System.out.println("Enter the file name you'd like the program to read: "); 
-        
-        //fileName = in.nextLine(); 
-        
         try{
         
            inFile = new Scanner (new FileReader (fileName)); 
@@ -128,11 +124,7 @@ public class ReadFile
         
         int currentReading;
         int previousReading;
-        
-        
-        //System.out.println("Enter the file name you'd like the program to read: "); 
-        
-        //fileName = in.nextLine(); 
+         
         
         try{
         
@@ -186,6 +178,7 @@ public class ReadFile
                
                
                meterCounter.incrementNumberOfObjects(); //increment after each time a flatObject has been added to the array list
+               
            }
         
         }
